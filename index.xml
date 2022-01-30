@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE HTML>
+<html b:layoutsVersion='3'
+      b:defaultwidgetversion='2'
+      expr:lang='data:blog.locale.language'
+      expr:dir='data:blog.locale.languageDirection'
+      xmlns='http://www.w3.org/1999/xhtml'
+      xmlns:b='http://www.google.com/2005/gml/b'
+      xmlns:data='http://www.google.com/2005/gml/data'
+      xmlns:expr='http://www.google.com/2005/gml/expr'>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <title><data:blog.title.escaped/></title>
+    <meta name="description" expr:content="data:blog.metaDescription"/>
+    <meta name="viewport"    content="width=device-width, initial-scale=1"/>
+
+    <!-- теги OpenGraph для отображения информации на сторонних сайтах -->
+    <meta property="og:url"         expr:content="data:view.url.canonical"/>
+    <meta property="og:title"       expr:content="data:view.title.escaped"/>
+    <meta property="og:description" expr:content="data:view.description.escaped"/>
+
+    <b:skin><![CDATA[
+			/* -----------------------------------------------
+				Blogger Page Style
+				Name:     Coder Knows
+				Designer: Eugene V. Vdovenko
+				URL:      coderknows.com
+			----------------------------------------------- */
+			html {
+				/* Устанавливает желаемый относительный размер шрифта */
+				-webkit-text-size-adjust: 100%;
+			}
+		]]></b:skin>
+    <b:template-skin><![CDATA[
+			/* -----------------------------------------------
+				Blogger Template Style
+				Name:     Coder Knows
+				Designer: Eugene V. Vdovenko
+				URL:      coderknows.com
+			----------------------------------------------- */
+		]]></b:template-skin>
+
+    <b:defaultmarkups>
+      <b:defaultmarkup type='Common'>
+        <b:includable id='widgetNotAvailableInPreview'>
+          <b:if cond='data:widget.type == &quot;AdSense&quot;'>
+            <div class='vertical-ad-placeholder'>
+              <span><b:message name='messages.adsGoHere'/></span>
+            </div>
+            <b:else/>
+            <b:include name='super.widgetNotAvailableInPreview'/>
+          </b:if>
+        </b:includable>
+      </b:defaultmarkup>
+    </b:defaultmarkups>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- шапка -->
+      <header>
+        <b:section id="Header1" class="header" name="Header" showaddelement='yes'/>
+      </header>
+
+      <!-- основной контент -->
+      <main>
+        <article>&amp;nbsp;</article>
+      </main>
+
+      <!-- боковые панели -->
+      <aside>&amp;nbsp;</aside>
+
+      <!-- подвал -->
+      <footer>&amp;nbsp;</footer>
+    </div>
+  </body>
+</html>
