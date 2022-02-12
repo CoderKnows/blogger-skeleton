@@ -2,8 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html b:layoutsVersion='3'
       b:defaultwidgetversion='2'
-      b:css="false"
-      b:js="true"
+      b:css='false'
+      b:js='true'
       expr:lang='data:blog.locale.language'
       expr:dir='data:blog.locale.languageDirection'
       xmlns='http://www.w3.org/1999/xhtml'
@@ -14,7 +14,7 @@
   <b:include name='clearHtmlTag'/>
   <head>
 
-    <b:with var="title" value="data:view.isHomepage ? data:blog.title.escaped : (data:view.title.escaped +  &quot; | &quot; + data:blog.title.escaped)">
+    <b:with var='title' value='data:view.isHomepage ? data:blog.title.escaped : (data:view.title.escaped +  &quot; | &quot; + data:blog.title.escaped)'>
       <title><data:title/></title>
     </b:with>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -125,7 +125,7 @@
           <b:include name='super.openGraphMetaData'/>
           <b:comment render='true'>КАСТОМНЫЕ META-ТЕГИ</b:comment>
           <b:if cond='data:widgets'>
-            <b:comment render="true">Safari</b:comment>
+            <b:comment render='true'>Safari</b:comment>
             <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
           </b:if>
           <b:if cond='data:view.isSingleItem'>
@@ -147,7 +147,7 @@
             </b:if>
           </b:if>
 
-          <b:with var="country" value="data:blog.locale.country ? data:blog.locale.country : (data:blog.locale.language == &quot;ru&quot; ? &quot;RU&quot; : &quot;US&quot;)">
+          <b:with var='country' value='data:blog.locale.country ? data:blog.locale.country : (data:blog.locale.language == &quot;ru&quot; ? &quot;RU&quot; : &quot;US&quot;)'>
             <b:comment>Страна подтягивается не всегда</b:comment>
             <meta property='og:locale' expr:content='data:blog.locale.language + "_" + data:country'/>
           </b:with>
@@ -161,7 +161,7 @@
           <b:comment>Тут скрипты для помещения в конец страницы</b:comment>
           <b:include data='blog' name='google-analytics'/>
         </b:includable>
-        <b:includable id="clearHtmlTag">
+        <b:includable id='clearHtmlTag'>
           <b:comment>Убираем аттрибуты из тега HTML для валидатора W3C</b:comment>
           <b:attr name='xmlns:og'   value=''/>
           <b:attr name='xmlns:expr' value=''/>
@@ -179,30 +179,30 @@
     <div class="wrapper">
       <b:comment>ШАПКА</b:comment>
       <header>
-        <b:section id="Header1" class="header" name="Заголовок" maxwidgets='-1' showaddelement='yes'/>
-        <b:section id="Navbar1" class="navbar" name="Меню" maxwidgets='2' showaddelement='yes'/>
-        <b:section ads="true" id="Ads1" class="ads" name="Реклама в заголовке" showaddelement='no'/>
+        <b:section id='Header1' class='header' name='Заголовок' maxwidgets='-1' showaddelement='yes'/>
+        <b:section id='Navbar1' class='navbar' name='Меню' maxwidgets='2' showaddelement='yes'/>
+        <b:section ads='true' id='Ads1' class='ads' name='Реклама в заголовке' showaddelement='no'/>
       </header>
 
       <b:comment>ОСНОВНОЙ КОНТЕНТ</b:comment>
       <main>
-        <b:section id="Main1" class="main" name="Закрепленное сообщение" showaddelement='yes'/>
-        <b:section ads="true" id="Ads2"  class="ads" name="Реклама" showaddelement='no'/>
-        <b:section id="Main2" class="main" name="Контент страницы" showaddelement='yes'/>
+        <b:section id='Main1' class='main' name='Закрепленное сообщение' showaddelement='yes'/>
+        <b:section ads='true' id='Ads2'  class='ads' name='Реклама' showaddelement='no'/>
+        <b:section id='Main2' class='main' name='Контент страницы' showaddelement='yes' preferred='true'/>
       </main>
 
       <b:comment>БОКОВЫЕ ПАНЕЛИ</b:comment>
       <aside>
-        <b:section id="Aside1" class="aside" name="Боковая панель" showaddelement='yes'/>
-        <b:section ads="true" id="Aside2" class="aside" name="Боковая панель" showaddelement='yes'/>
-        <b:section ads="true" id="Ads3" class="ads" name="Реклама в боковой панели" showaddelement='no'/>
+        <b:section id='Aside1' class='aside' name='Боковая панель' showaddelement='yes'/>
+        <b:section ads='true' id='Aside2' class='aside' name='Боковая панель' showaddelement='yes'/>
+        <b:section ads='true' id='Ads3' class='ads' name='Реклама в боковой панели' showaddelement='no'/>
       </aside>
 
       <b:comment>ПОДВАЛ</b:comment>
       <footer>
-        <b:section ads="true" id="Ads4" class="ads" name="Реклама в подвале" showaddelement='no'/>
-        <b:section id="Footer1" class="footer" name="Подвал" showaddelement='yes'/>
-        <b:section id="Footer2" class="footer" name="Подвал" showaddelement='yes'/>
+        <b:section ads='true' id='Ads4' class='ads' name='Реклама в подвале' showaddelement='no'/>
+        <b:section id='Footer1' class='footer' name='Подвал' showaddelement='yes'/>
+        <b:section id='Footer2' class='footer' name='Подвал' showaddelement='yes'/>
       </footer>
     </div>
 
