@@ -1,77 +1,211 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html b:layoutsVersion='3'
       b:defaultwidgetversion='2'
+      b:css="false"
+      b:js="true"
       expr:lang='data:blog.locale.language'
       expr:dir='data:blog.locale.languageDirection'
       xmlns='http://www.w3.org/1999/xhtml'
       xmlns:b='http://www.google.com/2005/gml/b'
       xmlns:data='http://www.google.com/2005/gml/data'
-      xmlns:expr='http://www.google.com/2005/gml/expr'>
+      xmlns:expr='http://www.google.com/2005/gml/expr'
+      xmlns:og='http://ogp.me/ns#'>
+  <b:include name='clearHtmlTag'/>
   <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
-    <title><data:blog.title.escaped/></title>
-    <meta name="description" expr:content="data:blog.metaDescription"/>
-    <meta name="viewport"    content="width=device-width, initial-scale=1"/>
 
-    <!-- теги OpenGraph для отображения информации на сторонних сайтах -->
-    <meta property="og:url"         expr:content="data:view.url.canonical"/>
-    <meta property="og:title"       expr:content="data:view.title.escaped"/>
-    <meta property="og:description" expr:content="data:view.description.escaped"/>
+    <b:with var="title" value="data:view.isHomepage ? data:blog.title.escaped : (data:view.title.escaped +  &quot; | &quot; + data:blog.title.escaped)">
+      <title><data:title/></title>
+    </b:with>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <b:skin><![CDATA[
-			/* -----------------------------------------------
-				Blogger Page Style
-				Name:     Coder Knows
-				Designer: Eugene V. Vdovenko
-				URL:      coderknows.com
-			----------------------------------------------- */
-			html {
-				/* Устанавливает желаемый относительный размер шрифта */
-				-webkit-text-size-adjust: 100%;
-			}
-		]]></b:skin>
-    <b:template-skin><![CDATA[
-			/* -----------------------------------------------
-				Blogger Template Style
-				Name:     Coder Knows
-				Designer: Eugene V. Vdovenko
-				URL:      coderknows.com
-			----------------------------------------------- */
-		]]></b:template-skin>
+    <b:include data='blog' name='allHeadContent'/>
+
+    <b:if cond='data:view.isHomepage'>
+      <script type='application/ld+json'>{&quot;@context&quot;:&quot;http://schema.org&quot;,&quot;@type&quot;:&quot;WebSite&quot;,&quot;name&quot;:&quot;<data:view.title.escaped/>&quot;,&quot;url&quot;:&quot;<data:view.url.canonical/>&quot;,&quot;potentialAction&quot;:{&quot;@type&quot;:&quot;SearchAction&quot;,&quot;target&quot;:&quot;<data:view.url.canonical/>search?q={search_term_string}&quot;,&quot;query-input&quot;:&quot;required name=search_term_string&quot;}}</script>
+    </b:if>
+
+    <b:if cond='!data:view.isLayoutMode'>
+      &lt;style&gt;&lt;!--
+        /* <b:skin><![CDATA[ --> */
+        /* -----------------------------------------------
+          Стили для шаблона
+          Name:     Coder Knows
+          Designer: Coder Knows' Author
+          URL:      coderknows.com
+         ----------------------------------------------- */
+        /* -- Variable definitions -- */
+        /*
+          <Group description="Body">
+            <Variable name="body.background.color" description="Body background color" type="color" default="#fff"  value="#ececec"/>
+          </Group>
+        */
+
+        html {
+          /* Устанавливает желаемый относительный размер шрифта */
+          -webkit-text-size-adjust: 100%;
+        }
+
+      ]]></b:skin>
+    </b:if>
+
+    <b:if cond='data:view.isLayoutMode'>
+      <b:template-skin>/* <![CDATA[ */
+        /* -----------------------------------------------
+          Стили для дизайнера шаблонов
+          Name:     Coder Knows
+          Designer: Coder Knows' Author
+          URL:      coderknows.com
+         ----------------------------------------------- */
+        body#layout {
+          padding: 0;
+        }
+
+        .wrapper {
+
+        }
+
+        .wrapper > header {
+          float: left;
+          width: 100%;
+        }
+
+        .wrapper > header:after {
+          content: '';
+          display: block;
+          height: 0;
+          clear: both;
+        }
+
+        .wrapper > main {
+          float:left;
+          width: 60%;
+        }
+
+        .wrapper > aside {
+          float:right;
+          width: 40%;
+        }
+
+        .wrapper > aside > .aside {
+          float: right;
+          width: 48%;
+          height: 260px;
+        }
+
+        .wrapper > aside > .aside:first-child {
+          float: left;
+        }
+
+        .wrapper > aside > .ads {
+          clear: both;
+        }
+
+        .wrapper > footer {
+
+        }
+
+        .wrapper > footer:before {
+          content: '';
+          display: block;
+          height: 0;
+          clear: both;
+        }
+      /* ]]> */</b:template-skin>
+    </b:if>
 
     <b:defaultmarkups>
       <b:defaultmarkup type='Common'>
-        <b:includable id='widgetNotAvailableInPreview'>
-          <b:if cond='data:widget.type == &quot;AdSense&quot;'>
-            <div class='vertical-ad-placeholder'>
-              <span><b:message name='messages.adsGoHere'/></span>
-            </div>
-            <b:else/>
-            <b:include name='super.widgetNotAvailableInPreview'/>
+        <b:includable id='allHeadContent' var='blog'>
+          <b:comment render='true'>ТЕГИ BLOGGER</b:comment>
+            <b:include data='blog' name='all-head-content'/>
+          <b:comment render='true'>/ТЕГИ BLOGGER</b:comment>
+        </b:includable>
+        <b:includable id='openGraphMetaData'>
+          <b:include name='super.openGraphMetaData'/>
+          <b:comment render='true'>КАСТОМНЫЕ META-ТЕГИ</b:comment>
+          <b:if cond='data:widgets'>
+            <b:comment render="true">Safari</b:comment>
+            <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
           </b:if>
+          <b:if cond='data:view.isSingleItem'>
+            <meta property='og:type' content='article'/>
+            <meta property='og:site_name' expr:content='data:blog.title'/>
+            <b:if cond='data:blog.postImageUrl'>
+              <meta property='og:image' expr:content='resizeImage(data:blog.postImageUrl, 1200, "1200:630")'/>
+            </b:if>
+          <b:else/>
+            <meta property='og:type' content='website'/>
+            <b:if cond='data:view.featuredImage'>
+              <b:comment>Изображение текущей страницы</b:comment>
+              <meta property='og:image' expr:content='resizeImage(data:view.featuredImage, 1200, "1200:630")'/>
+            <b:elseif cond='data:widgets'/>
+              <b:comment>Изображения всех постов из списка</b:comment>
+              <b:loop values='data:widgets.Blog.first.posts where (p => p.featuredImage) map (p => p.featuredImage)' var='imageUrl'>
+                <meta property='og:image' expr:content='resizeImage(data:imageUrl, 1200, "1200:630")'/>
+              </b:loop>
+            </b:if>
+          </b:if>
+
+          <b:with var="country" value="data:blog.locale.country ? data:blog.locale.country : (data:blog.locale.language == &quot;ru&quot; ? &quot;RU&quot; : &quot;US&quot;)">
+            <b:comment>Страна подтягивается не всегда</b:comment>
+            <meta property='og:locale' expr:content='data:blog.locale.language + "_" + data:country'/>
+          </b:with>
+
+          <b:comment render='true'>/КАСТОМНЫЕ META-ТЕГИ</b:comment>
+        </b:includable>
+        <b:includable id='headerAnalytics' var='blog'>
+          <b:comment>Тут скрипты для помещения в начало страницы</b:comment>
+        </b:includable>
+        <b:includable id='footerAnalytics' var='blog'>
+          <b:comment>Тут скрипты для помещения в конец страницы</b:comment>
+          <b:include data='blog' name='google-analytics'/>
+        </b:includable>
+        <b:includable id="clearHtmlTag">
+          <b:comment>Убираем аттрибуты из тега HTML для валидатора W3C</b:comment>
+          <b:attr name='xmlns:og'   value=''/>
+          <b:attr name='xmlns:expr' value=''/>
+          <b:attr name='xmlns:data' value=''/>
+          <b:attr name='xmlns:b'    value=''/>
+          <b:attr name='xmlns'      value=''/>
         </b:includable>
       </b:defaultmarkup>
     </b:defaultmarkups>
+
+    <b:include data='blog' name='headerAnalytics'/>
   </head>
 
   <body>
     <div class="wrapper">
-      <!-- шапка -->
+      <b:comment>ШАПКА</b:comment>
       <header>
-        <b:section id="Header1" class="header" name="Header" showaddelement='yes'/>
+        <b:section id="Header1" class="header" name="Заголовок" maxwidgets='-1' showaddelement='yes'/>
+        <b:section id="Navbar1" class="navbar" name="Меню" maxwidgets='2' showaddelement='yes'/>
+        <b:section ads="true" id="Ads1" class="ads" name="Реклама в заголовке" showaddelement='no'/>
       </header>
 
-      <!-- основной контент -->
+      <b:comment>ОСНОВНОЙ КОНТЕНТ</b:comment>
       <main>
-        <article>&amp;nbsp;</article>
+        <b:section id="Main1" class="main" name="Закрепленное сообщение" showaddelement='yes'/>
+        <b:section ads="true" id="Ads2"  class="ads" name="Реклама" showaddelement='no'/>
+        <b:section id="Main2" class="main" name="Контент страницы" showaddelement='yes'/>
       </main>
 
-      <!-- боковые панели -->
-      <aside>&amp;nbsp;</aside>
+      <b:comment>БОКОВЫЕ ПАНЕЛИ</b:comment>
+      <aside>
+        <b:section id="Aside1" class="aside" name="Боковая панель" showaddelement='yes'/>
+        <b:section ads="true" id="Aside2" class="aside" name="Боковая панель" showaddelement='yes'/>
+        <b:section ads="true" id="Ads3" class="ads" name="Реклама в боковой панели" showaddelement='no'/>
+      </aside>
 
-      <!-- подвал -->
-      <footer>&amp;nbsp;</footer>
+      <b:comment>ПОДВАЛ</b:comment>
+      <footer>
+        <b:section ads="true" id="Ads4" class="ads" name="Реклама в подвале" showaddelement='no'/>
+        <b:section id="Footer1" class="footer" name="Подвал" showaddelement='yes'/>
+        <b:section id="Footer2" class="footer" name="Подвал" showaddelement='yes'/>
+      </footer>
     </div>
+
+    <b:include data='blog' name='footerAnalytics'/>
   </body>
 </html>
